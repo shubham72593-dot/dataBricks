@@ -1,0 +1,39 @@
+{
+  "runAs" : null,
+  "name" : "Python_job.job",
+  "description" : "job that creates files async",
+  "schedule" : null,
+  "continuous" : null,
+  "maxConcurrentRuns" : 2,
+  "gitConfig" : null,
+  "queue" : null,
+  "path" : "/Workspace/Shubham_demo",
+  "jobClusters" : [ {
+    "clusterKey" : "031d6626-f3fe-466e-badb-b1caf8d3aced",
+    "clusterName" : "Notebook_Compute",
+    "newCluster" : null
+  } ],
+  "tasks" : [ {
+    "type" : "NOTEBOOK_TASK",
+    "taskKey" : "Task_445696",
+    "dependsOn" : [ ],
+    "runIf" : "ALL_SUCCESS",
+    "maxRetries" : 5,
+    "minRetryIntervalMillis" : 30000,
+    "isRetryOnTimeout" : true,
+    "notebookPath" : "/Workspace/Shubham_demo/Untitled_1773984113424759.ipynb",
+    "source" : null,
+    "gitConfig" : null,
+    "cluster" : {
+      "clusterKey" : "031d6626-f3fe-466e-badb-b1caf8d3aced",
+      "clusterName" : null,
+      "newCluster" : null
+    },
+    "parameters" : [ ],
+    "timeoutSeconds" : 300,
+    "isStreaming" : null
+  } ],
+  "parameters" : null,
+  "timeoutSeconds" : null,
+  "jobTag" : null
+}
