@@ -1,0 +1,95 @@
+Appendix H - Git Providers REST Api and Git-cli for artifact-operations-service
+Objective is to compare the two approaches for providing git-integration features in artifact-operations-service.
+The design objective of git-integration is to support a work-tree based approach in which users checkout(sparse/dense) a repository to a single .git folder and multiple branches refer to this.
+
+
+
+The comparison will be done on following points
+
+Feature Parity
+Administration capabilities (Meta-data)
+User friendly (Error Handling)
+Performance 
+Feature Parity
+REST API Based Approach
+We compare REST API from the following git providers 
+
+git labs
+bitbucket
+gitHub
+REST API provide a robust way to be able to execute remote operations like pulling metadata for a repository, creating branches, committing changes, etc.
+
+The REST API gets invoked inside of the JVM environment and is lighter in weight than invoking a git-cli operation through a spawned OS process. 
+The providers however each differ in the features that they provide. 
+
+
+Legend: 
+
+
+planned use in implementation
+(tick)	Operation/ Feature supported
+(error)	Operation/ Feature not supported
+Operation / Operation	
+REST-API
+
+APIs are specific to GIT provider
+clone/checkout operations only via archive download
+GIT CLI
+
+works for any GIT provider
+does not cover PR creation
+= reference implementation
+3rd Party GIT emulators
+such as JGit, GitPython, PyGit2 dulwich, LibGit2
+GitHub	GitLab	Bitbucket	Azure DevOps	GitHub / GitLab / BitBucket / Azure DevOps / ...	 
+Commits / Branches / Tags	(tick) 	(tick) 	(tick) 	(tick) 	(tick)	(tick)
+Clone / Fetch / Checkout	(error) 	(error) 	(error) 	(error) 	(tick)	(tick)
+Create Pull Request	(tick) 	(tick) 	(tick) 	(tick) 	(error) 	(error)
+Authentication	OAuth, PAT, JWT	OAuth, PAT	OAuth, PAT	OAuth, PAT	
+
+Worktree	(error) 	(error) 	(tick) 	(error) 	(tick)	(error)
+LFS	(tick) 	(tick) 	(tick) 	(tick) 	
+
+File Operations	CRUD	CRUD	CRUD	CRUD	(tick)	(tick)
+State management	Server Managed	Server Managed	Server Managed	Server Managed	(tick)	
+GraphQL API	(tick) 	(error) 	(error) 	(error) 	(error)	(error)
+Rate Limiting	5000 rph	10 rps	1000 rph	60 rpm	
+
+Actively Maintained	(tick)	(tick)	(tick)	(tick)	(tick) 	varies
+The REST API model however do not interact with local file system, which is critical for us to implement work-tree based approach. The checkout and fetch commands also need to interact with local file system. Hence a pure REST API based approach is not feasible.
+
+
+
+GIT-CLI Approach
+Pros
+The cli is the most feature complete utility for git integration. It also interacts with local file systems through which we can provide a worktree based approach. This is critical since we only want to create a single .git directory which is able to serve multiple developers. As our north star is MLops the .git directories will only become huge in size for ML use cases. Having multiple .git directories stored on file systems will increase cts.
+
+Cons
+Error handling - we would need to reply on custom output parsing to be able to understand the cli output and convey it to the upstream service. 
+
+State Management - with multiple instances running git-cli we would need to implement state management in our micro-service. To be able to support features like GIT LFS which have operations with high running time this state management becomes viable.
+
+
+
+3rd Party GIT emulators
+...
+
+
+
+
+
+
+
+DO NOT REVIEW BELOW THIS LINE - This is work in progress and inputs for later implementation phase
+
+Still to be integrated
+Try out
+
+Findings in Databricks re Git operations
+output and branch switching
+Notebook editor continues to show old output cells after branch switch
+details: from branch1: open common.py with print("branch1"); output shows "branch1"; switch to main → editor continues to show old output (even when notebook has been executed earlier also for main branch
+Notebook editor → switch to branch which does not have current file name → Editor closes with "File has been deleted!" → output cell data is lost
+→ it appears that current session is attached just by file name; not by some internal file object version 
+Renaming a notebook is properly reflected as rename in git (even though it shows up during git dialog as delete+add file)
+

@@ -1,0 +1,20 @@
+fss lcid : ocid1.filesystem.oc1.phx.aaaaaaaaaamtsvojobuhqllqojxwiotqnb4c2ylefuzqaaaa 
+mount taregt ocid : ocid1.mounttarget.oc1.phx.aaaaaby27vlc5mzsobuhqllqojxwiotqnb4c2ylefuzqaaaa
+
+
+Questions 
+1. what's the limitation on the mount taregt
+2. Lifecycle/Clean up?
+3. Policies? Read/Write? Replication?
+4. changes in https://bitbucket.oci.oraclecorp.com/projects/DATAHUB/repos/datahub/browse/datahub-cp/datahub-cp-worker/helm-charts/install_airflow_cell.sh#96,122,151 ?? 
+
+
+5                 {{- if eq .name "dos-dag" }}
+                subPath: {{ $.Values.airflow.namespace }}
+                {{- end }} what is this about?
+
+
+Error : Error: Invalid value for input variable on shared_modules/regional-modules/dataplane-application/dp-deployment/modules.tf line 27, in module "oke-shared-services": 27: cell_info = local.cells_info[each.key] The given value is not suitable for module.dataplane-application-phase1.module.oke-shared-services["1"].var.cell_info declared at shared_modules/devops-pipeline/application/input.tf:18,1-21: attributes "aidp_fss_id", "aidp_fss_mount_ip_address", "kms_delta_share_vault_id", and "object_storage_buckets" are required.
+
+
+Couple observations, why does the fss name is not suffiexed by AD, fix that
