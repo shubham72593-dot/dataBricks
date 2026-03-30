@@ -14,7 +14,6 @@ Questions
                 {{- end }} what is this about?
 
 
-Error : Error: Invalid value for input variable on shared_modules/regional-modules/dataplane-application/dp-deployment/modules.tf line 27, in module "oke-shared-services": 27: cell_info = local.cells_info[each.key] The given value is not suitable for module.dataplane-application-phase1.module.oke-shared-services["1"].var.cell_info declared at shared_modules/devops-pipeline/application/input.tf:18,1-21: attributes "aidp_fss_id", "aidp_fss_mount_ip_address", "kms_delta_share_vault_id", and "object_storage_buckets" are required.
 
 
 Couple observations, why does the fss name is not suffiexed by AD, fix that
