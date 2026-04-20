@@ -14,6 +14,7 @@ N = 100  # adjust if you want
 
 if len(sys.argv) < 2:
     print("Usage: python analyze_strata.py <directory_with_strata_csv>")
+    print("adding code for debugging")
     sys.exit(1)
 
 directory = sys.argv[1]
