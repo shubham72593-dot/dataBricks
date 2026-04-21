@@ -5,4 +5,4 @@ Lets make some changes to files which we want to be committed.
 Removing commits from remote
 adding commits in remote
 adding content for rebase
-adding content for conflict during merge
+adding content for conflict during merge adding content on remote on the main branch
