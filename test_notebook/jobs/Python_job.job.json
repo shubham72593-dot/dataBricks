@@ -1,0 +1,37 @@
+{
+  "runAs" : null,
+  "name" : "Python_job",
+  "description" : "job that creates files async",
+  "schedule" : null,
+  "continuous" : null,
+  "maxConcurrentRuns" : 2,
+  "gitConfig" : null,
+  "queue" : null,
+  "path" : "/Workspace/Shubham_demo",
+  "jobClusters" : [ {
+    "clusterKey" : "${jobs.dependencies.Notebook_Compute.compute.key}",
+    "newCluster" : null
+  } ],
+  "tasks" : [ {
+    "type" : "NOTEBOOK_TASK",
+    "taskKey" : "Task_445696",
+    "dependsOn" : [ ],
+    "runIf" : "ALL_SUCCESS",
+    "maxRetries" : 5,
+    "minRetryIntervalMillis" : 30000,
+    "isRetryOnTimeout" : true,
+    "notebookPath" : "${bundle.root}/.aidp/artifacts/Bundle_demo_source/notebooks/DemoSetup/ChurnDemoCleanup.ipynb",
+    "source" : null,
+    "gitConfig" : null,
+    "cluster" : {
+      "clusterKey" : "${jobs.dependencies.Notebook_Compute.compute.key}",
+      "newCluster" : null
+    },
+    "parameters" : [ ],
+    "timeoutSeconds" : 300,
+    "isStreaming" : null
+  } ],
+  "parameters" : null,
+  "timeoutSeconds" : null,
+  "jobTag" : null
+}

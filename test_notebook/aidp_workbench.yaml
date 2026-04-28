@@ -1,0 +1,6 @@
+---
+bundle:
+  name: "test_notebook"
+resources:
+  jobs:
+  - "Python_job"

@@ -1,0 +1,34 @@
+{
+  "displayName" : "Notebook_Compute",
+  "description" : null,
+  "type" : "USER",
+  "nodeType" : null,
+  "driverConfig" : {
+    "driverNodeType" : null,
+    "driverShape" : "amd.generic",
+    "driverShapeConfig" : {
+      "ocpus" : 1,
+      "gpus" : 0,
+      "memoryInGBs" : 16
+    }
+  },
+  "workerConfig" : {
+    "workerShape" : "amd.generic",
+    "workerShapeConfig" : {
+      "ocpus" : 1,
+      "gpus" : 0,
+      "memoryInGBs" : 16
+    },
+    "minWorkerCount" : 1,
+    "maxWorkerCount" : 10
+  },
+  "clusterRuntimeConfig" : {
+    "type" : "SPARK",
+    "initScripts" : [ ],
+    "sparkVersion" : "3.5.0",
+    "sparkAdvancedConfigurations" : { },
+    "sparkEnvVariables" : { }
+  },
+  "loggingConfig" : null,
+  "autoTerminationMinutes" : 120
+}
